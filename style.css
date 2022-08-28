@@ -1,0 +1,115 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+  font-family: "Aboreto", cursive;
+}
+
+.main_div {
+  width: 100%;
+  height: 60%;
+  position: relative;
+  max-width: 700px;
+  max-height: 250px;
+  overflow: hidden;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.routes {
+  display: flex;
+  justify-content: space-between;
+  width: 70px;
+  position: absolute;
+  right: 15px;
+  bottom: 20px;
+  z-index: 11;
+}
+.arrow {
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  cursor: pointer;
+  object-fit: contain;
+  border-radius: 100%;
+  background-color: #00dbde;
+  background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+}
+.tr {
+  transform: rotate(180deg);
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  background-color: orange;
+  border-radius: 10px;
+  position: relative;
+
+  -webkit-transition: all 0.9s 0s ease;
+  -moz-transition: all 0.9s 0s ease;
+  -o-transition: all 0.9s 0s ease;
+  transition: all 0.9s 0s ease;
+}
+
+.slide_image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  position: absolute;
+  pointer-events: none;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 10px;
+
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.48252804539784666) 11%,
+    rgba(0, 0, 0, 0.24723392775078779) 52%,
+    rgba(0, 0, 0, 0.21922272326899506) 53%,
+    rgba(0, 0, 0, 0.49093140674238445) 76%
+  );
+}
+
+.slide_item_box {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50%;
+  height: 150px;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-direction: column;
+
+  -webkit-transition: all 0.9s 0s ease;
+  -moz-transition: all 0.9s 0s ease;
+  -o-transition: all 0.9s 0s ease;
+  transition: all 0.9s 0s ease;
+}
+
+.slide_item {
+  color: white;
+  margin: 0px;
+}
+
+.slide_button {
+  color: white;
+  background-color: #00dbde;
+  background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+  width: 100px;
+  border: none;
+  padding: 5px 20px;
+  cursor: pointer;
+}
