@@ -4,19 +4,35 @@ body {
   align-items: center;
   height: 95vh;
   font-family: "Aboreto", cursive;
+  margin: 0px;
+  padding: 0px;
 }
 
 .main_div {
-  width: 100%;
-  height: 60%;
+  width: 90%;
+  height: 300px;
   position: relative;
-  max-width: 700px;
-  max-height: 250px;
+  max-width: 1000px;
   overflow: hidden;
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 600px) {
+  .main_div {
+    height: 200px;
+  }
+  .slide_item_box {
+    width: 80% !important;
+  }
+  .slide_item:nth-child(1) {
+    font-size: 22px !important;
+  }
+  .slide_item:nth-child(2) {
+    font-size: 15px !important;
+  }
 }
 
 .routes {
@@ -24,8 +40,8 @@ body {
   justify-content: space-between;
   width: 70px;
   position: absolute;
-  right: 15px;
-  bottom: 20px;
+  right: 30px;
+  bottom: 30px;
   z-index: 11;
 }
 .arrow {
@@ -49,11 +65,12 @@ body {
   background-color: orange;
   border-radius: 10px;
   position: relative;
+  margin-right: 0px;
 
-  -webkit-transition: all 0.9s 0s ease;
-  -moz-transition: all 0.9s 0s ease;
-  -o-transition: all 0.9s 0s ease;
-  transition: all 0.9s 0s ease;
+  -webkit-transition: all 1.2s 0s ease-in, all 0.5s 0s ease;
+  -moz-transition: all 1.2s 0s ease-in, all 0.5s 0s ease;
+  -o-transition: all 1.2s 0s ease-in, all 0.5s 0s ease;
+  transition: all 1.2s 0s ease-in, all 0.5s 0s ease;
 }
 
 .slide_image {
@@ -84,7 +101,6 @@ body {
 .slide_item_box {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   width: 50%;
   height: 150px;
   margin-left: 20px;
@@ -92,10 +108,8 @@ body {
   justify-content: center;
   gap: 15px;
   flex-direction: column;
+  text-shadow: 5px 1px 4px rgba(0, 0, 0, 0.87);
 
-  -webkit-transition: all 0.9s 0s ease;
-  -moz-transition: all 0.9s 0s ease;
-  -o-transition: all 0.9s 0s ease;
   transition: all 0.9s 0s ease;
 }
 
