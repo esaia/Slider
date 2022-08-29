@@ -4,17 +4,67 @@ const slide = document.querySelectorAll(".slide");
 const slide_items_box = document.querySelectorAll(".slide_item_box");
 
 let x = 0;
-
 let y = -200;
+slide_items_box[0].style.transform = `translateY(-50%)`;
+
 // setInterval(function () {
 //   right.click();
 // }, 10000);
 
-// console.log(parseInt(Math.abs(y).toString().split("")[0]));
+let posX1;
+let posX2;
+let initialposition;
+let finalposition;
 
-// slide_items_box[0].style.transform = `translateY(0%)
+const dragStart = (e) => {
+  e.preventDefault();
+  for (let i = 0; i < slide.length; i++) {
+    initialposition = slide[i].offsetLeft;
+  }
 
-slide_items_box[0].style.transform = `translateY(-50%)`;
+  if (e.type === "touchstart") {
+    posX1 = e.touches[0].clientX;
+  } else {
+    posX1 = e.clientX;
+
+    document.onmouseup = dragEnd;
+    document.onmousemove = dragMove;
+  }
+};
+
+const dragMove = (e) => {
+  if (e.type === "touchmove") {
+    posX2 = posX1 - e.touches[0].clientX;
+    posX1 = e.touches[0].clientX;
+  } else {
+    posX2 = posX1 - e.clientX;
+    posX1 = e.clientX;
+  }
+
+  for (let i = 0; i < slide.length; i++) {
+    slide[i].style.left = `${slide[i].offsetLeft - posX2}px `;
+  }
+};
+const dragEnd = () => {
+  finalposition = slide[0].offsetLeft;
+  if (finalposition - initialposition < 400) {
+    right.click();
+  } else if (finalposition - initialposition > 500) {
+    left.click();
+  } else {
+    for (let i = 0; i < slide.length; i++) {
+      slide[i].slide.left = `${initialposition}px`;
+    }
+  }
+
+  document.onmouseup = null;
+  document.onmousemove = null;
+};
+
+slide[0].addEventListener("mousedown", dragStart);
+slide[0].addEventListener("touchstart", dragStart);
+slide[0].addEventListener("touchmove", dragMove);
+slide[0].addEventListener("touchend", dragEnd);
 
 left.addEventListener("click", () => {
   if (x === 0) {
@@ -66,8 +116,8 @@ const textopening = () => {
 
   //hide other slides
   try {
-    slide[t - 1].style.opacity = "20%";
-    slide[t + 1].style.opacity = "20%";
+    slide[t - 1].style.opacity = "10%";
+    slide[t + 1].style.opacity = "10%";
   } catch (error) {
     console.log(error);
   }
