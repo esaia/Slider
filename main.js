@@ -46,7 +46,7 @@ const dragMove = (e) => {
   slide[t].style.left = `${-posX2 * 7}px`;
 };
 const dragEnd = (e) => {
-  console.log(slide[t].style.left);
+  console.log(t);
 
   if (parseInt(slide[t].style.left) < -15) {
     right.click();
@@ -109,12 +109,12 @@ const textopening = () => {
   t = parseInt(Math.abs(x).toString().split("")[0]);
   //hide other slides
   try {
-    slide[t - 1].style.opacity = "10%";
-    slide[t + 1].style.opacity = "10%";
+    slide[t - 1].style.opacity = "0%";
+    slide[t + 1].style.opacity = "0%";
   } catch (error) {
     console.log(error);
     slide[t].style.opacity = "100%";
-    slide[1].style.opacity = "10%";
+    slide[1].style.opacity = "0%";
   }
 
   //text show
