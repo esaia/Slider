@@ -50,7 +50,7 @@ const dragEnd = (e) => {
 
   if (parseInt(slide[t].style.left) < -15) {
     right.click();
-  } else if (parseInt(slide[t].style.left) > 15) {
+  } else if (parseInt(slide[t].style.left) > 5) {
     left.click();
   } else {
     slide[t].style.left = `0px`;
@@ -64,6 +64,8 @@ const dragEnd = (e) => {
   slide[t].addEventListener("touchstart", dragStart);
   slide[t].addEventListener("touchmove", dragMove);
   slide[t].addEventListener("touchend", dragEnd);
+  slide[t - 1].style.left = `0px`;
+  slide[t + 1].style.left = `0px`;
 };
 
 slide[t].addEventListener("mousedown", dragStart);
@@ -109,12 +111,12 @@ const textopening = () => {
   t = parseInt(Math.abs(x).toString().split("")[0]);
   //hide other slides
   try {
-    slide[t - 1].style.opacity = "0%";
-    slide[t + 1].style.opacity = "0%";
+    slide[t - 1].style.opacity = "60%";
+    slide[t + 1].style.opacity = "60%";
   } catch (error) {
     console.log(error);
     slide[t].style.opacity = "100%";
-    slide[1].style.opacity = "0%";
+    slide[1].style.opacity = "60%";
   }
 
   //text show
