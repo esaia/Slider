@@ -1,9 +1,11 @@
 const left = document.getElementById("left");
 const right = document.getElementById("right");
 const slide = document.querySelectorAll(".slide");
+const main_div = document.querySelectorAll(".main_div")[0];
 const slide_items_box = document.querySelectorAll(".slide_item_box");
-
 let x = 0;
+let t = parseInt(Math.abs(x).toString().split("")[0]);
+
 let y = -200;
 slide_items_box[0].style.transform = `translateY(-50%)`;
 
@@ -18,22 +20,22 @@ let finalposition;
 
 const dragStart = (e) => {
   e.preventDefault();
-  for (let i = 0; i < slide.length; i++) {
-    initialposition = slide[i].offsetLeft;
-  }
+
+  initialposition = slide[t].offsetLeft;
 
   if (e.type === "touchstart") {
     posX1 = e.touches[0].clientX;
   } else {
     posX1 = e.clientX;
-
     document.onmouseup = dragEnd;
     document.onmousemove = dragMove;
   }
+  //   console.log(main_div.offsetLeft);
+  //   console.log(main_div.clientWidth);
 };
 
 const dragMove = (e) => {
-  if (e.type === "touchmove") {
+  if (e.type == "touchmove") {
     posX2 = posX1 - e.touches[0].clientX;
     posX1 = e.touches[0].clientX;
   } else {
@@ -41,54 +43,46 @@ const dragMove = (e) => {
     posX1 = e.clientX;
   }
 
-  for (let i = 0; i < slide.length; i++) {
-    slide[i].style.left = `${slide[i].offsetLeft - posX2}px `;
-  }
+  slide[t].style.left = `${-posX2 * 7}px`;
 };
-const dragEnd = () => {
-  finalposition = slide[0].offsetLeft;
-  if (finalposition - initialposition < 400) {
+const dragEnd = (e) => {
+  console.log(slide[t].style.left);
+
+  if (parseInt(slide[t].style.left) < -15) {
     right.click();
-  } else if (finalposition - initialposition > 500) {
+  } else if (parseInt(slide[t].style.left) > 15) {
     left.click();
   } else {
-    for (let i = 0; i < slide.length; i++) {
-      slide[i].slide.left = `${initialposition}px`;
-    }
+    slide[t].style.left = `0px`;
   }
+
+  slide[t].style.left = `0px`;
 
   document.onmouseup = null;
   document.onmousemove = null;
+  slide[t].addEventListener("mousedown", dragStart);
+  slide[t].addEventListener("touchstart", dragStart);
+  slide[t].addEventListener("touchmove", dragMove);
+  slide[t].addEventListener("touchend", dragEnd);
 };
 
-slide[0].addEventListener("mousedown", dragStart);
-slide[0].addEventListener("touchstart", dragStart);
-slide[0].addEventListener("touchmove", dragMove);
-slide[0].addEventListener("touchend", dragEnd);
+slide[t].addEventListener("mousedown", dragStart);
+slide[t].addEventListener("touchstart", dragStart);
+slide[t].addEventListener("touchmove", dragMove);
+slide[t].addEventListener("touchend", dragEnd);
 
 left.addEventListener("click", () => {
   if (x === 0) {
     for (let i = 0; i < slide.length; i++) {
-      slide[i].style.setProperty(
-        "transform",
-        `translateX(-${slide.length - 1}00% )`
-      );
-
-      // slide[i].style.transform = `translateX(-${slide.length - 1}00% )`;
+      slide[i].style.transform = `translateX(-${slide.length - 1}00% )`;
     }
     x = parseInt(`-${slide.length - 1}00`);
-    textopening();
-  } else if (x === -100) {
-    for (let i = 0; i < slide.length; i++) {
-      slide[i].style.transform = `translateX(0%)`;
-    }
-    x = 0;
     textopening();
   } else {
     x += 100;
     for (let i = 0; i < slide.length; i++) {
-      slide[i].style.setProperty("transform", `translateX(${x}% )`);
-      // slide[i].style.transform = `translateX(${x}%)`;
+      //   slide[i].style.setProperty("transform", `translateX(${x}% )`);
+      slide[i].style.transform = `translateX(${x}%)`;
     }
     textopening();
   }
@@ -104,7 +98,7 @@ right.addEventListener("click", () => {
   } else {
     x -= 100;
     for (let i = 0; i < slide.length; i++) {
-      slide[i].style.setProperty("transform", `translateX(${x}%   )`);
+      slide[i].style.transform = `translateX(${x}%)`;
     }
 
     textopening();
@@ -112,21 +106,21 @@ right.addEventListener("click", () => {
 });
 
 const textopening = () => {
-  let t = parseInt(Math.abs(x).toString().split("")[0]);
-
+  t = parseInt(Math.abs(x).toString().split("")[0]);
   //hide other slides
   try {
     slide[t - 1].style.opacity = "10%";
     slide[t + 1].style.opacity = "10%";
   } catch (error) {
     console.log(error);
+    slide[t].style.opacity = "100%";
+    slide[1].style.opacity = "10%";
   }
 
   //text show
   slide_items_box[t].style.transform = `translateY(0%)`;
   slide_items_box[t].style.transition = `none`;
   slide_items_box[t].style.opacity = "0%";
-
   setTimeout(() => {
     slide[t].style.opacity = "100%";
   }, 10);
